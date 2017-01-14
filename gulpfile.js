@@ -67,7 +67,7 @@ gulp.task('cssPreprocessor', function() {
 /*------------------------------- HTML INCLUDES -----------------------------------*/
 /*---------------------------------------------------------------------------------*/
 gulp.task("includes", function() {
-    gulp.src("src/*.html")
+    gulp.src('src/*.html')
         .pipe(include())
         .pipe(gulp.dest("dist/"))
 });
