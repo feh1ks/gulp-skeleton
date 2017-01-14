@@ -18,6 +18,7 @@ gulp.task('copy', function () {
         {src: 'bower_components/jquery/dist/jquery.min.js', dest: 'dist/js/'},
         {src: 'bower_components/bootstrap/dist/js/bootstrap.min.js', dest: 'dist/js/'},
         {src: 'bower_components/bootstrap/dist/fonts/*.*', dest: 'dist/fonts/'},
+        {src: 'src/fonts/**/*.*', dest: 'dist/fonts/'},
 		{src: 'src/*.ico', dest: 'dist/'}
 		//{src: 'bower_components/fontawesome/fonts/*.*', dest: 'dist/fonts/'}
     ];
@@ -45,7 +46,7 @@ gulp.task('compressJs', function() {
 /*------------------------------ COMPRESS IMAGES ----------------------------------*/
 /*---------------------------------------------------------------------------------*/
 gulp.task('compressImages', () =>
-    gulp.src('src/img/*')
+    gulp.src('src/img/**/*')
         .pipe(imagemin())
         .pipe(gulp.dest('dist/img'))
 );
@@ -66,7 +67,7 @@ gulp.task('cssPreprocessor', function() {
 /*------------------------------- HTML INCLUDES -----------------------------------*/
 /*---------------------------------------------------------------------------------*/
 gulp.task("includes", function() {
-    gulp.src("src/index.html")
+    gulp.src("src/*.html")
         .pipe(include())
         .pipe(gulp.dest("dist/"))
 });
