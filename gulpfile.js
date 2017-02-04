@@ -8,7 +8,8 @@ var gulp = require('gulp'),                      // Gulp JS
     copy2 = require('gulp-copy2'),               // Copy files
     less = require('gulp-less'),                 // Less compiler
     path = require('path'),                      // Array of paths to be used for @import directives
-    rename = require("gulp-rename");             // Rename files
+    rename = require("gulp-rename"),            // Rename files
+    fileinclude = require('gulp-file-include');  // File Include
 
 /*---------------------------------------------------------------------------------*/
 /*----------------------------------- COPY ----------------------------------------*/
@@ -72,13 +73,24 @@ gulp.task("includes", function() {
         .pipe(gulp.dest("dist/"))
 });
 /*---------------------------------------------------------------------------------*/
+/*------------------------------- FILE INCLUDES -----------------------------------*/
+/*---------------------------------------------------------------------------------*/
+gulp.task('fileinclude', function() {
+    gulp.src(['src/**/*.html'])
+        .pipe(fileinclude({
+        prefix: '@@',
+        basepath: '@file'
+    }))
+        .pipe(gulp.dest('dist/'));
+});
+/*---------------------------------------------------------------------------------*/
 /*---------------------------------- DEFAULT --------------------------------------*/
 /*---------------------------------------------------------------------------------*/
 gulp.task('default', function(){
-    gulp.run('copy', 'concatJs', 'compressJs', 'compressImages', 'cssPreprocessor', 'includes');
+    gulp.run('copy', 'concatJs', 'compressJs', 'compressImages', 'cssPreprocessor', 'includes', 'fileinclude');
 
     // Watch
     gulp.watch("src/**/*", function(event){
-        gulp.run('copy', 'concatJs', 'compressJs', 'compressImages', 'cssPreprocessor', 'includes');
+        gulp.run('copy', 'concatJs', 'compressJs', 'compressImages', 'cssPreprocessor', 'includes', 'fileinclude');
     });
 });
