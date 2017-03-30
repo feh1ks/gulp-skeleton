@@ -1,25 +1,153 @@
 @import "../../bower_components/bootstrap/less/variables.less";
+
 // Variables
 
-// My variables
+//Grid system
+@grid-columns: 12;
 
 // Responsive mixins for bootstrap
 
 // Screen Phone
-@max-phone:       ~"(max-width: 480px)";
+@max-phone:       ~"(max-width: 479px)";
 @min-phone:       ~"(min-width: 480px)";
 // Screen Tablet
-@max-tablet:      ~"(max-width: 768px)";
+@max-tablet:      ~"(max-width: 767px)";
 @min-tablet:      ~"(min-width: 768px)";
 // Screen Desktop
-@max-desktop:     ~"(max-width: 992px)";
+@max-desktop:     ~"(max-width: 991px)";
 @min-desktop:     ~"(min-width: 992px)";
 // Screen Desktop Lg
-@max-desktop-lg:  ~"(max-width: 1200px)";
+@max-desktop-lg:  ~"(max-width: 1199px)";
 @min-desktop-lg:  ~"(min-width: 1200px)";
 
-// Headings
-@headings: h1,h2,h3,h4,h5,h6;
+// Media queries breakpoints
+@screen-xs: 480px;
+@screen-sm: 768px;
+@screen-md: 992px;
+@screen-lg: 1200px;
 
-// Body font
-@font-family-base:  "Titillium Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+// Container sizes
+@container-tablet:        (720px + @grid-gutter-width);
+@container-desktop:       (940px + @grid-gutter-width);
+@container-large-desktop: (1140px + @grid-gutter-width);
+
+// Typography
+@font-family-base:     @font-family-sans-serif;
+@headings-color:       inherit;
+@headings-font-weight: 500;
+@font-size-base:       14px;
+
+// Typography - Headings
+@font-size-h1: floor((@font-size-base * 2.6));
+@font-size-h2: floor((@font-size-base * 2.15));
+@font-size-h3: ceil((@font-size-base * 1.7));
+@font-size-h4: ceil((@font-size-base * 1.25));
+@font-size-h5: @font-size-base;
+@font-size-h6: ceil((@font-size-base * 0.85));
+
+// Colors
+@brand-primary: darken(#428bca, 6.5%);
+@brand-success: #5cb85c;
+@brand-info:    #5bc0de;
+@brand-warning: #f0ad4e;
+@brand-danger:  #d9534f;
+@text-muted:    @gray-light;
+
+// Buttons - Font Weight
+@btn-font-weight: normal;
+
+// Buttons - Colors
+@btn-default-color: #333;
+@btn-primary-color: #fff;
+@btn-info-color:    #fff;
+@btn-warning-color: #fff;
+@btn-danger-color:  #fff;
+@btn-success-color: #fff;
+
+// Buttons - Backgrounds
+@btn-default-bg: #fff;
+@btn-primary-bg: @brand-primary;
+@btn-info-bg:    @brand-info;
+@btn-warning-bg: @brand-warning;
+@btn-danger-bg:  @brand-danger;
+@btn-success-bg: @brand-success;
+
+// Buttons - Border Colors
+@btn-default-border: #ccc;
+@btn-primary-border: darken(@btn-primary-bg, 5%);
+@btn-info-border:    darken(@btn-info-bg, 5%);
+@btn-warning-border: darken(@btn-warning-bg, 5%);
+@btn-danger-border:  darken(@btn-danger-bg, 5%);
+@btn-success-border: darken(@btn-success-bg, 5%);
+
+// Scaffolding
+@body-bg:    #fff;
+@text-color: @gray-dark;
+@link-color: @brand-primary;
+@link-hover-color:      darken(@link-color, 15%);
+@link-hover-decoration: underline;
+
+// Navbar
+@navbar-height: 50px;
+@navbar-margin-bottom: @line-height-computed;
+@navbar-border-radius: @border-radius-base;
+
+// Navbar Default
+@navbar-default-color:  #777;
+@navbar-default-bg:     #f8f8f8;
+@navbar-default-border: darken(@navbar-default-bg, 6.5%);
+
+// Navbar Default - Links
+@navbar-default-link-color:        #777;
+@navbar-default-link-hover-color:  #333;
+@navbar-default-link-hover-bg:     transparent;
+@navbar-default-link-active-color: #555;
+@navbar-default-link-active-bg:    darken(@navbar-default-bg, 6.5%);
+
+// Navbar - Toggle
+@navbar-default-toggle-icon-bar-bg:  #888;
+@navbar-default-toggle-border-color: #ddd;
+@navbar-default-toggle-hover-bg:     #ddd;
+
+// Forms - Input
+@input-bg:     #fff;
+@input-color:  @gray;
+@input-border: #ccc;
+@input-color-placeholder: #999;
+@input-border-radius:     @border-radius-base;
+@input-height-base:       (@line-height-computed + (@padding-base-vertical * 2) + 2);
+
+// Forms - Group Addon
+@form-group-margin-bottom:       15px;
+@input-group-addon-bg:           @gray-lighter;
+@input-group-addon-border-color: @input-border;
+
+// Tables
+@table-cell-padding: 8px;
+@table-bg:           transparent;
+@table-bg-hover:     #f5f5f5;
+@table-border-color: #ddd;
+
+// Badges
+@badge-color: #fff;
+@badge-bg:    @gray-light;
+@badge-font-weight:   bold;
+@badge-line-height:   1;
+@badge-border-radius: 10px;
+
+// Wells
+@well-bg: #f5f5f5;
+@well-border: darken(@well-bg, 7%);
+
+// Modals
+@modal-inner-padding: 15px;
+@modal-title-padding: 15px;
+@modal-content-bg:    #fff;
+@modal-content-border-color: rgba(0,0,0,.2);
+@modal-header-border-color:  #e5e5e5;
+@modal-footer-border-color:  @modal-header-border-color;
+
+// Modals - Sizes
+@modal-lg: 900px;
+@modal-md: 600px;
+@modal-sm: 300px;
