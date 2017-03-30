@@ -1,3 +1,5 @@
+//!=include plugins/google-map-init.js
+
 $(document).ready(function(){
 
     /* Initialize Js Plugins
