@@ -8,7 +8,7 @@ var gulp = require('gulp'),                      // Gulp JS
     copy2 = require('gulp-copy2'),               // Copy files
     less = require('gulp-less'),                 // Less compiler
     path = require('path'),                      // Array of paths to be used for @import directives
-    rename = require("gulp-rename"),            // Rename files
+    rename = require("gulp-rename"),             // Rename files
     fileinclude = require('gulp-file-include');  // File Include
 
 /*---------------------------------------------------------------------------------*/
@@ -20,8 +20,8 @@ gulp.task('copy', function () {
         {src: 'bower_components/bootstrap/dist/js/bootstrap.min.js', dest: 'dist/js/'},
         {src: 'bower_components/bootstrap/dist/fonts/*.*', dest: 'dist/fonts/'},
         {src: 'src/fonts/**/*.*', dest: 'dist/fonts/'},
-		{src: 'src/*.ico', dest: 'dist/'}
-		//{src: 'bower_components/fontawesome/fonts/*.*', dest: 'dist/fonts/'}
+        {src: 'src/*.ico', dest: 'dist/'}
+        //{src: 'bower_components/fontawesome/fonts/*.*', dest: 'dist/fonts/'}
     ];
     return copy2(paths);
 });
@@ -30,7 +30,7 @@ gulp.task('copy', function () {
 /*---------------------------------------------------------------------------------*/
 gulp.task('concatJs', function() {
     return gulp.src(['bower_components/folder/pluginOneJS',
-					 'bower_components/owl-carousel2/dist/owl.carousel.min.js'])
+				 'bower_components/owl-carousel2/dist/owl.carousel.min.js'])
         .pipe(concat('plugins.js'))
         .pipe(gulp.dest('src/js/'));
 });
@@ -39,6 +39,7 @@ gulp.task('concatJs', function() {
 /*---------------------------------------------------------------------------------*/
 gulp.task('compressJs', function() {
     gulp.src('src/js/*.*')
+        .pipe(include())
         .pipe(uglify())
         .pipe(rename({suffix: ".min"}))
         .pipe(gulp.dest('dist/js/'));
@@ -56,8 +57,8 @@ gulp.task('compressImages', () =>
 /*---------------------------------------------------------------------------------*/
 gulp.task('cssPreprocessor', function() {
     return gulp.src(['src/less/style.less',
-					 'src/less/bootstrap.less',
-					 'src/less/plugins.less'])
+				 'src/less/bootstrap.less',
+                     'src/less/plugins.less'])
         .pipe(less())
         .pipe(autoprefixer({browsers: ['last 4 versions']}))
         .pipe(csso())
