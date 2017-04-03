@@ -9,6 +9,7 @@ $(document).ready(function(){
     //!=include plugins/owl-carousel-init.js
     //!=include plugins/wow-js-init.js
     //!=include plugins/circle-progress-init.js
+    //!=include plugins/slick-init.js
 
     /* Custom Js
     ========================================*/

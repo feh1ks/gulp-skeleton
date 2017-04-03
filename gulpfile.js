@@ -21,7 +21,9 @@ gulp.task('copy', function () {
         {src: 'bower_components/bootstrap/dist/fonts/*.*', dest: 'dist/fonts/'},
         {src: 'src/fonts/**/*.*', dest: 'dist/fonts/'},
         {src: 'src/*.ico', dest: 'dist/'}
-        //{src: 'bower_components/fontawesome/fonts/*.*', dest: 'dist/fonts/'}
+        //{src: 'bower_components/fontawesome/fonts/*.*', dest: 'dist/fonts/'},
+        //{src: 'bower_components/slick-carousel/slick/fonts/*.*', dest: 'dist/css/fonts/'},
+        //{src: 'bower_components/slick-carousel/slick/ajax-loader.gif', dest: 'dist/css/'},
     ];
     return copy2(paths);
 });
@@ -29,8 +31,19 @@ gulp.task('copy', function () {
 /*------------------------------ -- CONCAT JS -------------------------------------*/
 /*---------------------------------------------------------------------------------*/
 gulp.task('concatJs', function() {
-    return gulp.src(['bower_components/folder/pluginOneJS',
-				 'bower_components/owl-carousel2/dist/owl.carousel.min.js'])
+    return gulp.src([//'bower_components/owl-carousel2/dist/owl.carousel.min.js',
+                     //'bower_components/jquery-circle-progress/dist/circle-progress.min.js',
+                     //'src/libs/appear-js/jquery.appear.js',
+                     //'bower_components/slick-carousel/slick/slick.min.js',
+                     //'bower_components/jquery.easing/js/jquery.easing.min.js',
+                     //'bower_components/parallax.js/parallax.min.js',
+                     //'bower_components/wow/dist/wow.min.js',
+                     //'bower_components/jQuery-Mask-Plugin/dist/jquery.mask.min.js',
+                     //'bower_components/fotorama/fotorama.js',
+                     //'bower_components/isotope/dist/isotope.pkgd.min.js',
+                     //'bower_components/fancybox/source/jquery.fancybox.js',
+                     //'bower_components/fancybox/source/jquery.fancybox.pack.js'
+                    ])
         .pipe(concat('plugins.js'))
         .pipe(gulp.dest('src/js/'));
 });
