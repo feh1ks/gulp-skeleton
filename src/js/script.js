@@ -1,4 +1,5 @@
 //!=include plugins/google-map-init.js
+//!=include plugins/yt-api-multiple-videos.js
 
 $(document).ready(function(){
 
