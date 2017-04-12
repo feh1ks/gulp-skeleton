@@ -9,7 +9,8 @@ var gulp = require('gulp'),                      // Gulp JS
     less = require('gulp-less'),                 // Less compiler
     path = require('path'),                      // Array of paths to be used for @import directives
     rename = require("gulp-rename"),             // Rename files
-    fileinclude = require('gulp-file-include');  // File Include
+    fileinclude = require('gulp-file-include'),  // File Include
+    htmlmin = require('gulp-htmlmin');           // HTML Minification
 
 /*---------------------------------------------------------------------------------*/
 /*----------------------------------- COPY ----------------------------------------*/
@@ -82,9 +83,9 @@ gulp.task('cssPreprocessor', function() {
 /*------------------------------- HTML INCLUDES -----------------------------------*/
 /*---------------------------------------------------------------------------------*/
 gulp.task("includes", function() {
-    gulp.src('src/*.html')
+    /*gulp.src('src/*.html')
         .pipe(include())
-        .pipe(gulp.dest("dist/"))
+        .pipe(gulp.dest("dist/"))*/
 });
 /*---------------------------------------------------------------------------------*/
 /*------------------------------- FILE INCLUDES -----------------------------------*/
@@ -92,9 +93,13 @@ gulp.task("includes", function() {
 gulp.task('fileinclude', function() {
     gulp.src(['src/**/*.html'])
         .pipe(fileinclude({
-        prefix: '@@',
-        basepath: '@file'
-    }))
+            prefix: '@@',
+            basepath: '@file'
+        }))
+        .pipe(htmlmin({
+            collapseWhitespace: true,
+            removeComments: true
+        }))
         .pipe(gulp.dest('dist/'));
 });
 /*---------------------------------------------------------------------------------*/
