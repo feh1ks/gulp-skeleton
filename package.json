@@ -7,7 +7,7 @@
     "gulp-concat": "latest",
     "gulp-copy2": "latest",
     "gulp-csso": "latest",
-    "gulp-imagemin": "latest",
+    "gulp-tinypng-compress": "latest",
     "gulp-include": "^2.2.1",
     "gulp-less": "latest",
     "gulp-sass": "^2.3.1",
