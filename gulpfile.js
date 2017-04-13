@@ -10,7 +10,9 @@ var gulp = require('gulp'),                      // Gulp JS
     path = require('path'),                      // Array of paths to be used for @import directives
     rename = require("gulp-rename"),             // Rename files
     fileinclude = require('gulp-file-include'),  // File Include
-    htmlmin = require('gulp-htmlmin');           // HTML Minification
+    htmlmin = require('gulp-htmlmin'),           // HTML Minification
+    tinypng = require('gulp-tinypng-compress'),  // Minify images using tinypng API
+    styleInject = require("gulp-style-inject");  // Inject CSS Style
 
 /*---------------------------------------------------------------------------------*/
 /*----------------------------------- COPY ----------------------------------------*/
@@ -70,7 +72,8 @@ gulp.task('compressImages', function () {
 /*----------------------------- CSS PREPROCESSORS ---------------------------------*/
 /*---------------------------------------------------------------------------------*/
 gulp.task('cssPreprocessor', function() {
-    return gulp.src(['src/less/style.less',
+    return gulp.src(['src/less/firstscreen.less',
+                     'src/less/style.less',
 				 'src/less/bootstrap.less',
                      'src/less/plugins.less'])
         .pipe(less())
@@ -92,6 +95,9 @@ gulp.task("includes", function() {
 /*---------------------------------------------------------------------------------*/
 gulp.task('fileinclude', function() {
     gulp.src(['src/**/*.html'])
+        .pipe(styleInject({
+            path: 'dist/css/'
+        }))
         .pipe(fileinclude({
             prefix: '@@',
             basepath: '@file'

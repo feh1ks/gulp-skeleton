@@ -7,6 +7,7 @@
     "gulp-concat": "latest",
     "gulp-copy2": "latest",
     "gulp-csso": "latest",
+    "gulp-imagemin": "latest",
     "gulp-tinypng-compress": "latest",
     "gulp-include": "^2.2.1",
     "gulp-less": "latest",
@@ -14,6 +15,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "latest",
     "gulp-file-include": "latest",
-    "gulp-htmlmin" : "latest"
+    "gulp-htmlmin" : "latest",
+    "gulp-style-inject" : "latest"
   }
 }
