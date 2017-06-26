@@ -1,0 +1,6 @@
+{
+    "name": "gulp-skeleton",
+    "dependencies": {
+			"bootstrap": "latest"
+		}
+}

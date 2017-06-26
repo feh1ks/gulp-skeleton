@@ -1,0 +1,24 @@
+// Nav
+nav.navbar.navbar-default#header-nav
+	.container
+
+		// Logo & mobile toggle menu
+		.navbar-header
+			button.navbar-toggle(type='button' data-toggle='collapse' data-target='#main-navbar-collapse')
+				span.sr-only Toggle navigation
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+			a.page-scroll.navbar-brand(href='#home')
+				img(src='img/logo.png' alt='')
+
+		// Nav links
+		.collapse.navbar-collapse#main-navbar-collapse
+			ul.nav.navbar-nav.navbar-right
+				li: a.page-scroll(href='#home') Home
+				li: a.page-scroll(href='#') Services
+				li: a.page-scroll(href='#') Team
+				li: a.page-scroll(href='#') Skills
+				li: a.page-scroll(href='#') Portfolio
+				li: a.page-scroll(href='#') About
+				li: a.page-scroll(href='#') Contact

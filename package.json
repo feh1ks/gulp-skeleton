@@ -11,11 +11,10 @@
     "gulp-tinypng-compress": "latest",
     "gulp-include": "^2.2.1",
     "gulp-less": "latest",
-    "gulp-sass": "^2.3.1",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "latest",
-    "gulp-file-include": "latest",
+    "gulp-pug": "latest",
     "gulp-htmlmin" : "latest",
-    "gulp-style-inject" : "latest"
+    "gulp-html-prettify": "latest"
   }
 }

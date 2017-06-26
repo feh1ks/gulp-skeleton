@@ -9,10 +9,10 @@ var gulp = require('gulp'),                      // Gulp JS
     less = require('gulp-less'),                 // Less compiler
     path = require('path'),                      // Array of paths to be used for @import directives
     rename = require("gulp-rename"),             // Rename files
-    fileinclude = require('gulp-file-include'),  // File Include
+    pug = require('gulp-pug'),                   // HTML Preprocessor
     htmlmin = require('gulp-htmlmin'),           // HTML Minification
     tinypng = require('gulp-tinypng-compress'),  // Minify images using tinypng API
-    styleInject = require("gulp-style-inject");  // Inject CSS Style
+		prettify = require('gulp-html-prettify');    // Beautify HTML
 
 /*---------------------------------------------------------------------------------*/
 /*----------------------------------- COPY ----------------------------------------*/
@@ -31,9 +31,9 @@ gulp.task('copy', function () {
     return copy2(paths);
 });
 /*---------------------------------------------------------------------------------*/
-/*------------------------------ -- CONCAT JS -------------------------------------*/
+/*------------------------------- -- PLUGINS --------------------------------------*/
 /*---------------------------------------------------------------------------------*/
-gulp.task('concatJs', function() {
+gulp.task('plugins', function() {
     return gulp.src([//'bower_components/owl-carousel2/dist/owl.carousel.min.js',
                      //'bower_components/jquery-circle-progress/dist/circle-progress.min.js',
                      //'src/libs/appear-js/jquery.appear.js',
@@ -51,9 +51,9 @@ gulp.task('concatJs', function() {
         .pipe(gulp.dest('src/js/'));
 });
 /*---------------------------------------------------------------------------------*/
-/*-------------------------------- COMPRESS JS ------------------------------------*/
+/*-------------------------------- JAVASCRIPT -------------------------------------*/
 /*---------------------------------------------------------------------------------*/
-gulp.task('compressJs', function() {
+gulp.task('js', function() {
     gulp.src('src/js/*.*')
         .pipe(include())
         .pipe(uglify())
@@ -61,61 +61,55 @@ gulp.task('compressJs', function() {
         .pipe(gulp.dest('dist/js/'));
 });
 /*---------------------------------------------------------------------------------*/
-/*------------------------------ COMPRESS IMAGES ----------------------------------*/
+/*---------------------------------- TINYPNG --------------------------------------*/
 /*---------------------------------------------------------------------------------*/
-gulp.task('compressImages', function () {
+gulp.task('tinypng', function () {
     gulp.src('src/img/**/*')
         .pipe(tinypng({ key: 'XBaIWfM_p-EYP6ScygZiX7SDW22BaRTl' }))
         .pipe(gulp.dest('dist/img'));
 });
 /*---------------------------------------------------------------------------------*/
-/*----------------------------- CSS PREPROCESSORS ---------------------------------*/
+/*---------------------------------- IMAGES ---------------------------------------*/
 /*---------------------------------------------------------------------------------*/
-gulp.task('cssPreprocessor', function() {
-    return gulp.src(['src/less/firstscreen.less',
-                     'src/less/style.less',
-				 'src/less/bootstrap.less',
+gulp.task('img', () =>
+	gulp.src('src/img/**/*.{jpg,jpeg,png}')
+		.pipe(imagemin())
+		.pipe(gulp.dest('dist/img'))
+);
+/*---------------------------------------------------------------------------------*/
+/*------------------------------------ CSS ----------------------------------------*/
+/*---------------------------------------------------------------------------------*/
+gulp.task('css', function() {
+    return gulp.src(['src/less/style.less',
+										 'src/less/bootstrap.less',
                      'src/less/plugins.less'])
         .pipe(less())
-        .pipe(autoprefixer({browsers: ['last 4 versions']}))
+        .pipe(autoprefixer({browsers: ['last 6 versions']}))
         .pipe(csso())
         .pipe(rename({suffix: ".min"}))
         .pipe(gulp.dest('dist/css'))
 });
 /*---------------------------------------------------------------------------------*/
-/*------------------------------- HTML INCLUDES -----------------------------------*/
+/*----------------------------------- HTML ----------------------------------------*/
 /*---------------------------------------------------------------------------------*/
-gulp.task("includes", function() {
-    /*gulp.src('src/*.html')
-        .pipe(include())
-        .pipe(gulp.dest("dist/"))*/
-});
-/*---------------------------------------------------------------------------------*/
-/*------------------------------- FILE INCLUDES -----------------------------------*/
-/*---------------------------------------------------------------------------------*/
-gulp.task('fileinclude', function() {
-    gulp.src(['src/**/*.html'])
-        .pipe(styleInject({
-            path: 'dist/css/'
-        }))
-        .pipe(fileinclude({
-            prefix: '@@',
-            basepath: '@file'
-        }))
+gulp.task('html', function buildHTML() {
+    return gulp.src('src/*.pug')
+        .pipe(pug())
         .pipe(htmlmin({
             collapseWhitespace: true,
             removeComments: true
         }))
-        .pipe(gulp.dest('dist/'));
+        .pipe(prettify())
+        .pipe(gulp.dest('dist/'))
 });
 /*---------------------------------------------------------------------------------*/
 /*---------------------------------- DEFAULT --------------------------------------*/
 /*---------------------------------------------------------------------------------*/
 gulp.task('default', function(){
-    gulp.run('copy', 'concatJs', 'compressJs', 'compressImages', 'cssPreprocessor', 'includes', 'fileinclude');
+    gulp.run('copy', 'html', 'css', 'plugins', 'js', 'img');
 
     // Watch
     gulp.watch("src/**/*", function(event){
-        gulp.run('copy', 'concatJs', 'compressJs', 'compressImages', 'cssPreprocessor', 'includes', 'fileinclude');
+        gulp.run('copy', 'html', 'css', 'plugins', 'js');
     });
 });
